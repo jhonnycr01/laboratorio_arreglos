@@ -9,17 +9,17 @@ public class Main {
 	static String[] arreglo;
 
 	public static void main(String[] args) throws IOException {
-
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 
 		int opcion = 0;
 		int witchArray;
-		int arregloA;
-		int arregloB;
+		
 
 		while (opcion != -1) {
-			Runtime.getRuntime().exec("clear");
+			//======Este comando sirve para limpiar la consola 
+			System.out.print("\033[H\033[2J");
+			System.out.flush();
+			//===================================
 			
 			System.out.println("\nplease enter the number of the option you would like to use: \n");
 			System.out.println("1.enter the 3 strings.");
@@ -114,7 +114,7 @@ public class Main {
 				if (arrayInt1 == null) {
 					arregloEnteros();
 				}
-				arregloTotalM();
+				arregloTotalConcatenado();
 				presioneUnaTeclaParaContinuar();
 				break;
 
@@ -139,17 +139,7 @@ public class Main {
 				if (arrayInt1 == null) {
 					arregloEnteros();
 				}
-				System.out.println("please enter 1 of the 2 arrays for the math operation");
-				arregloA = sc.nextInt();
-				System.out.println("please enter 2 of the 2 arrays for the math operation");
-				arregloB = sc.nextInt();
-				if (arregloA == 1 && arregloB == 2 && arrayInt1.length == arrayInt2.length) {
-					arregloTotalOperacion(arrayInt1, arrayInt2);
-				} else if (arregloA == 1 && arregloB == 3 && arrayInt1.length == arrayInt3.length) {
-					arregloTotalOperacion(arrayInt1, arrayInt3);
-				} else if (arregloA == 2 && arregloB == 3 && arrayInt2.length == arrayInt3.length) {
-					arregloTotalOperacion(arrayInt2, arrayInt3);
-				}
+				arreglosOperaciones();
 				presioneUnaTeclaParaContinuar();
 				break;
 			case 15: 
@@ -165,6 +155,9 @@ public class Main {
 		}
 	}
 
+	/**
+	 * this method wait for press a key to continue
+	 */
 	public static void presioneUnaTeclaParaContinuar() {
 		System.out.println("\n please enter key to continue.....");
 		Scanner sc = new Scanner(System.in);
@@ -173,9 +166,8 @@ public class Main {
 
 	/**
 	 * this method allows the user to enter 3 strings
+	 * for use later in the program
 	 * 
-	 * @param arreglo must be initialized the user added 3 strings in the array
-	 *                called arreglo
 	 */
 	public static void enterCadenas() {
 		Scanner sc = new Scanner(System.in);
@@ -193,25 +185,20 @@ public class Main {
 	}
 
 	/**
-	 * this method allows the user to display the length of the string enter in the
+	 * this method allows the user to display the length of each string enter in the
 	 * array
 	 * 
-	 * @param arreglo is the array of string to consult the length the program
-	 *                display the length of the string inside the array
 	 */
 	public static void longitudCadena() {
 		for (int i = 0; i < arreglo.length; i++) {
-			System.out.println("la longitud de la cadena " + (i + 1) + "es: " + arreglo[i].length());
+			System.out.println("la longitud de la cadena " + (i + 1) + " es: " + arreglo[i].length());
 		}
 		
 	}
 
 	/**
-	 * this method concatenate the strings
+	 * this method concatenate the strings in the array 
 	 * 
-	 * @param arreglo     must be initialized
-	 * @param cadenaConca must be initialized the program displays the 3 strings
-	 *                    concatenated
 	 */
 	public static void concatenarCadenas() {
 		String cadenaConca = "";
@@ -223,15 +210,9 @@ public class Main {
 	}
 
 	/**
-	 * this method allows the user to choose 1 of the 3 strings in the array and
-	 * then choose 1 character of the string already chosen
+	 * this method request to the user for a number position in strings
+	 * then show 1 character of the each string in array
 	 * 
-	 * @param arreglo          string where is going to search for the character
-	 * @param posicionArreglo  where its going to star searching
-	 * @param tamanioCadena    must be int
-	 * @param posicionCaracter must be initialized
-	 * @param f                must be initialized the program displays the
-	 *                         character in the position chosen by the user
 	 */
 	public static void caracterCadena() {
 		Scanner sc = new Scanner(System.in);
@@ -253,6 +234,9 @@ public class Main {
 		
 	}
 
+	/**
+	 * this method request to the user for a two numbers for division
+	 */
 	public static void numerosReales() {
 		Scanner sc = new Scanner(System.in);
 		double numero1, numero2;
@@ -264,17 +248,25 @@ public class Main {
 		
 	}
 
-	public static double pedirNumero(String mensaje) {
+	/**
+	 * this method show message and the request for a number 
+	 * @param message for display to user
+	 * @return
+	 */
+	public static double pedirNumero(String message) {
 		Scanner sc = new Scanner(System.in);
 		double numero;
 		do {
-			System.out.println(mensaje);
+			System.out.println(message);
 			numero = sc.nextDouble();
 			sc.nextLine();
 		} while (numero <= 0);
 		return numero;
 	}
 
+	/**
+	 * this method request two numbers then calculate division and show the residue of numbers
+	 */
 	public static void divisionResiduo() {
 		Scanner sc = new Scanner(System.in);
 		double numero1, numero2;
@@ -288,7 +280,9 @@ public class Main {
 				+ residuoNumeros);
 		
 	}
-
+	/**
+	 * this method request for create three arrays of integer numbers 
+	 */
 	public static void arregloEnteros() {
 		Scanner sc = new Scanner(System.in);
 		int sizeArrayInt1;
@@ -325,24 +319,25 @@ public class Main {
 
 		
 	}
-
+	
+	/**
+	 * this method show the integer arrays 
+	 */
 	public static void desplegarArreglos() {
-		int i;
-		for (i = 0; i < arrayInt1.length; i++) {
-			System.out.print(arrayInt1[i] + "|");
-		}
+		mostrarArreglo(arrayInt1);
 		System.out.println();
-		for (i = 0; i < arrayInt2.length; i++) {
-			System.out.print(arrayInt2[i] + "|");
-		}
+		mostrarArreglo(arrayInt2);
 		System.out.println();
-		for (i = 0; i < arrayInt3.length; i++) {
-			System.out.print(arrayInt3[i] + "|");
-		}
+		mostrarArreglo(arrayInt3);
 		System.out.println();
 		
 	}
-
+	/**
+	 * this method calculate the average of each array
+	 * @param arrayInt1 array of integers 1
+	 * @param arrayInt2 array of integers 2
+	 * @param arrayInt3 array of integers 3
+	 */
 	public static void promedioArreglo(int[] arrayInt1, int[] arrayInt2, int[] arrayInt3) {
 		Scanner sc = new Scanner(System.in);
 		double suma1 = 0, suma2 = 0, suma3 = 0;
@@ -374,7 +369,13 @@ public class Main {
 
 		
 	}
-
+	
+	/**
+	 * this method show the higher number in each array 
+	 * @param arrayInt1 array of integers 1
+	 * @param arrayInt2 array of integers 2
+	 * @param arrayInt3 array of integers 3
+	 */
 	public static void mayorValor(int[] arrayInt1, int[] arrayInt2, int[] arrayInt3) {
 		Scanner sc = new Scanner(System.in);
 		int numeroMayor1 = 0,numeroMayor2 = 0,numeroMayor3 = 0;
@@ -404,14 +405,38 @@ public class Main {
 
 		
 	}
-
+	/**
+	 * this method request for two numbers of array for operate them
+	 */
+	public static void arreglosOperaciones() {
+		Scanner sc = new Scanner(System.in);
+		int arregloA;
+		int arregloB;
+		System.out.print("please enter 1 of the 2 arrays for the math operation: ");
+		arregloA = sc.nextInt();
+		System.out.print("please enter 2 of the 2 arrays for the math operation: ");
+		arregloB = sc.nextInt();
+		if (arregloA == 1 && arregloB == 2 && arrayInt1.length == arrayInt2.length) {
+			arregloTotalOperacion(arrayInt1, arrayInt2);
+		} else if (arregloA == 1 && arregloB == 3 && arrayInt1.length == arrayInt3.length) {
+			arregloTotalOperacion(arrayInt1, arrayInt3);
+		} else if (arregloA == 2 && arregloB == 3 && arrayInt2.length == arrayInt3.length) {
+			arregloTotalOperacion(arrayInt2, arrayInt3);
+		}
+	}
+	
+	/**
+	 * this method operate two arrays requesting the operation 
+	 * @param arregloA
+	 * @param arregloB
+	 */
 	public static void arregloTotalOperacion(int[] arregloA, int[] arregloB) {
 		Scanner sc = new Scanner(System.in);
 		int mathOperation;
 		System.out.println(
 				"please enter the math operation that you would like to use: \n"
-				+ "1.sum \n"
-				+ "2.substraction \n"
+				+ " 1.sum \n"
+				+ " 2.substraction \n"
 				+ " 3.multiplication \n");
 		System.out.print("option: ");
 		mathOperation = sc.nextInt();
@@ -449,16 +474,24 @@ public class Main {
 
 		} else {
 			System.out.println("the " + nameMathOperation + " of the arrays is: ");
+			mostrarArreglo(arregloResultante);
 			System.out.print("[ ");
-			for (int i = 0; i < arregloResultante.length; i++) {
-				System.out.print(arregloResultante[i] + ", ");
-			}
-			System.out.print("]");
-
+			
 		}
 		
 	}
-
+	/**
+	 * this method show the concatenates arrays in one
+	 */
+	public static void arregloTotalConcatenado(){
+		int[] arregloTotal = arregloTotalM();
+		System.out.println("the union of the 3 arrays is: ");
+		mostrarArreglo(arregloTotal);		
+	}
+	/**
+	 * this method concatenates the arrays in one 
+	 * @return
+	 */
 	public static int[] arregloTotalM() {
 		int tamanoArregloTotal = arrayInt1.length + arrayInt2.length + arrayInt3.length;
 		int[] arregloTotal = new int[tamanoArregloTotal];
@@ -472,15 +505,13 @@ public class Main {
 		for (int k = 0; k < arrayInt3.length; k++) {
 			arregloTotal[k + arrayInt2.length + arrayInt1.length] = arrayInt3[k];
 		}
-		System.out.println("the union of the 3 arrays is: ");
-		System.out.print("[ ");
-		for (int i = 0; i < arregloTotal.length; i++) {
-			System.out.print(arregloTotal[i] + " | ");
-		}
-		System.out.print("]");
+		
 		return arregloTotal;
 	}
-
+	/**
+	 * this method show an array with unique values, taking each array of integers and concatenating them  
+	 * @param arregloTotal
+	 */
 	public static void arregloTotalSinRepetidos(int[] arregloTotal) {
 		int valorMarca;
 		int contador = 0;
@@ -507,14 +538,15 @@ public class Main {
 				k++;
 			}
 		}
-		System.out.println(arregloTotalSinRepetidos.length);
-		for (int i = 0; i < arregloTotalSinRepetidos.length; i++) {
-			System.out.println("the array with out the repeated" + arregloTotalSinRepetidos[i]);
-		}
-		
+		System.out.println("the array with out the repeated: ");
+		mostrarArreglo(arregloTotalSinRepetidos);
+			
 
 	}
-
+	
+	/**
+	 * this method show the numbers intercepts in arrays 
+	 */
 	public static void intercepcionArreglos() {
 		int tamanioTotal = arrayInt1.length + arrayInt2.length + arrayInt3.length;
 		int[] arregloIntercepcion = new int[tamanioTotal];
@@ -523,7 +555,7 @@ public class Main {
 
 		for (int i = 0; i < arrayInt1.length && bandera1 == false; i++) {
 			for (int j = 0; j < arrayInt2.length; j++) {
-				if (arrayInt1[1] == arrayInt2[j]) {
+				if (arrayInt1[i] == arrayInt2[j]) {
 					bandera1 = true;
 				}
 			}
@@ -548,6 +580,10 @@ public class Main {
 		
 	}
 	
+	/**
+	 * this method order a array with algorithm bubble  
+	 * @param arreglo array to order
+	 */
 	public static void ordernarArreglo(int[] arreglo) {
 		int temp;
 		for (int i = arreglo.length; i > 0; i--) {
@@ -560,6 +596,10 @@ public class Main {
 			}
 		}
 	}
+	
+	/**
+	 * this method request a number of array to order with algorithm bubble  
+	 */
 	public static void burbuja() {
 		Scanner sc = new Scanner(System.in);
 		int witchArray;
@@ -569,23 +609,36 @@ public class Main {
 		switch(witchArray) {
 		case 1:
 			ordernarArreglo(arrayInt1);
-			for (int k = 0; k < arrayInt1.length; k++) {
-				System.out.println("the array1 with the buble method is: " + arrayInt1[k]);
-			}
+			System.out.println("the array1 with the bubble method is: ");
+			mostrarArreglo(arrayInt1);
+			
 			break;
 		case 2:
 			ordernarArreglo(arrayInt2);
-			for (int k = 0; k < arrayInt2.length; k++) {
-				System.out.println("the array1 with the buble method is: " + arrayInt2[k]);
-			}
+			System.out.println("the array2 with the bubble method is: ");
+			mostrarArreglo(arrayInt2);
 			break;
 		case 3:
-			ordernarArreglo(arrayInt2);
-			for (int k = 0; k < arrayInt3.length; k++) {
-				System.out.println("the array1 with the buble method is: " + arrayInt3[k]);
-			}
+			ordernarArreglo(arrayInt3);
+			System.out.println("the array3 with the bubble method is: ");
+			mostrarArreglo(arrayInt3);
+			
 			break;
 		}
 		
+	}
+	
+	/**
+	 * 
+	 * @param arreglo
+	 */
+	public static void mostrarArreglo(int[] arreglo) {
+		String datos = "[ ";
+		for (int k = 0; k < arreglo.length; k++) {
+			datos += arreglo[k]+ ", ";
+		}
+		datos = datos.substring(0, datos.length()-1);
+		datos += " ]";
+		System.out.println(datos);
 	}
 }
